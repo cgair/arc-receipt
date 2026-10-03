@@ -1,5 +1,7 @@
 # ArcReceipt
 
+[**Open the live application**](https://cgair.github.io/arc-receipt/)
+
 Verify a USDC payment on **Arc mainnet (chain 5042)** and export its evidence as JSON. An independent, non-custodial tool for contributors, grant recipients and payment operators who need to answer: did this exact recipient receive this exact amount?
 
 The app queries the public mainnet RPC directly from the browser. No wallet connection, account, private key, transaction signing or backend database is required.
@@ -55,6 +57,8 @@ Native transfer emitter: `0xfffffffffffffffffffffffffffffffffffffffe`
 ## Architecture
 
 `dist/core.mjs` owns integer arithmetic, input validation, RPC reads and evidence interpretation. `dist/app.mjs` renders that result and exports exactly the displayed evidence. Static HTML/CSS supplies the accessible, responsive interface. `tests/` contains independent regression tests. Experimental WebMCP support is feature-detected; the ordinary form is always available.
+
+Independent reviews: [self-test report](docs/SELFTEST.md) · [acceptance report](docs/ACCEPTANCE.md).
 
 ## License
 

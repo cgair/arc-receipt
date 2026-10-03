@@ -37,4 +37,6 @@ Solo builder: cgair — https://github.com/cgair
 
 Repository: https://github.com/cgair/arc-receipt
 
+Live application: https://cgair.github.io/arc-receipt/
+
 Funding history: this newly created project has received no Circle or Arc program funding.
