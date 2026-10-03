@@ -1,0 +1,28 @@
+{
+  "reviewDate": "2026-10-04 Asia/Shanghai",
+  "url": "https://cgair.github.io/arc-receipt/",
+  "authentication": "none; Python urllib HTTP requests without cookies or credentials",
+  "repositoryPrivate": false,
+  "assets": [
+    {"path":"index.html","status":200,"matchesLocal":true,"sha256":"eafe25897d05d217b931164d6346ab1c72bf33c9c3a075d38f86861969fabdca"},
+    {"path":"app.mjs","status":200,"matchesLocal":true,"sha256":"13d1255636a649638074e62f97efabeb22f37a4a2f42190025366122141b7365"},
+    {"path":"core.mjs","status":200,"matchesLocal":true,"sha256":"6d29964288a5c174e1a0d03a904a3c7637c6e0cd6689a1b1844fbc0ea67828f5"},
+    {"path":"style.css","status":200,"matchesLocal":true,"sha256":"e73a072ce1ad9807ef280d2fb2bff09a74723038ed1d177568ffab97e2c9d4df"},
+    {"path":"example.json","status":200,"matchesLocal":true,"sha256":"b318291c4cd07b32cff00e9430d95a1456cedc34a5de206a2622fb31e500dd6d"}
+  ],
+  "browser": {
+    "realMainnetExample": "finalized and matched",
+    "wrongAmount": "Payment does not match",
+    "export": "actual button click; resulting Blob JSON independently inspected",
+    "mobileViewportWidth": 390,
+    "mobileDocumentWidth": 390,
+    "desktopViewportWidth": 1440,
+    "desktopDocumentWidth": 1440
+  },
+  "rejectedDeploymentEntrypoint": {
+    "url": "https://arc-receipt.chengeair23.chatgpt.site/",
+    "httpStatus": 403,
+    "browserMessage": "Sorry, you have been blocked; You are unable to access chatgpt.site",
+    "action": "No bypass attempted; GitHub Pages accepted instead"
+  }
+}
