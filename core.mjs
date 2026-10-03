@@ -3,6 +3,8 @@ export const TRANSFER = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55
 const HASH = /^0x[0-9a-fA-F]{64}$/;
 const ADDRESS = /^0x[0-9a-fA-F]{40}$/;
 const UINT = /^0x[0-9a-fA-F]+$/;
+const ZERO = '0x0000000000000000000000000000000000000000';
+function validateRecipient(value) { const address = validateAddress(value); if (address === ZERO) throw new Error('The zero address is a burn destination, not a payment recipient.'); return address; }
 export function validateHash(value) { const s = String(value ?? '').trim(); if (!HASH.test(s)) throw new Error('Enter a transaction hash: 0x followed by 64 hexadecimal characters.'); return s.toLowerCase(); }
 export function validateAddress(value) { const s = String(value ?? '').trim(); if (!ADDRESS.test(s)) throw new Error('Enter a valid 0x recipient address (40 hexadecimal characters).'); return s.toLowerCase(); }
 export function parseAmount(value, decimals = 18) {
@@ -19,7 +21,7 @@ function uint(value, name) { if (typeof value !== 'string' || !UINT.test(value))
 function topicAddress(topic) { if (!/^0x0{24}[0-9a-fA-F]{40}$/.test(topic)) throw new Error('RPC returned a malformed USDC transfer address.'); return '0x' + topic.slice(-40).toLowerCase(); }
 export function interpret(bundle, expected = {}) {
   const hash = validateHash(bundle.hash);
-  const recipient = expected.recipient?.trim() ? validateAddress(expected.recipient) : null;
+  const recipient = expected.recipient?.trim() ? validateRecipient(expected.recipient) : null;
   const amount = expected.amount?.trim() ? parseAmount(expected.amount) : null;
   if (uint(bundle.chainId, 'chain ID') !== BigInt(NETWORK.chainId)) throw new Error('Wrong network. Arc mainnet (5042) is required.');
   const { tx, receipt, block, finalized } = bundle;
@@ -53,11 +55,13 @@ export function interpret(bundle, expected = {}) {
       const decimals = log.address.toLowerCase() === NETWORK.usdc ? 6 : 18;
       const raw = uint(log.data, 'transfer amount');
       if (raw === 0n) continue;
-      payments.push({ from: topicAddress(log.topics[1]), to: topicAddress(log.topics[2]), raw: raw.toString(), decimals, amount: formatUnits(raw, decimals), source: decimals === 6 ? 'USDC ERC-20 event' : 'Native USDC event', logIndex: uint(log.logIndex, 'log index').toString(), emitter: log.address.toLowerCase() });
+      const from = topicAddress(log.topics[1]), to = topicAddress(log.topics[2]);
+      if (to === ZERO) continue; // Arc uses a zero-address destination for burns.
+      payments.push({ from, to, kind: from === ZERO ? 'mint' : 'transfer', raw: raw.toString(), decimals, amount: formatUnits(raw, decimals), source: from === ZERO ? 'USDC mint event' : decimals === 6 ? 'USDC ERC-20 event' : 'Native USDC event', logIndex: uint(log.logIndex, 'log index').toString(), emitter: log.address.toLowerCase() });
     }
     // Do not guess internal transfers when a receipt contains no supported
     // event. An ordinary top-level send is the only safe fallback.
-    if (!selected.length && tx.to && tx.input === '0x' && uint(tx.value, 'transaction value') > 0n) payments.push({ from: validateAddress(tx.from), to: validateAddress(tx.to), raw: BigInt(tx.value).toString(), decimals: 18, amount: formatUnits(tx.value), source: 'Top-level native transfer', logIndex: null, emitter: null });
+    if (!selected.length && tx.to && tx.to.toLowerCase() !== ZERO && tx.input === '0x' && uint(tx.value, 'transaction value') > 0n) payments.push({ from: validateAddress(tx.from), to: validateAddress(tx.to), kind: 'transfer', raw: BigInt(tx.value).toString(), decimals: 18, amount: formatUnits(tx.value), source: 'Top-level native transfer', logIndex: null, emitter: null });
   }
   const matching = payments.filter(p => (!recipient || p.to === recipient) && (amount === null || BigInt(p.raw) * 10n ** BigInt(18 - p.decimals) === amount));
   let isFinal = false;
@@ -79,7 +83,7 @@ export async function rpc(method, params, fetcher = fetch) {
 }
 export async function verifyPayment(hashInput, expected = {}, fetcher = fetch) {
   const hash = validateHash(hashInput);
-  if (expected.recipient?.trim()) validateAddress(expected.recipient);
+  if (expected.recipient?.trim()) validateRecipient(expected.recipient);
   if (expected.amount?.trim()) parseAmount(expected.amount);
   const chainId = await rpc('eth_chainId', [], fetcher);
   if (uint(chainId, 'chain ID') !== BigInt(NETWORK.chainId)) throw new Error('Wrong network. Arc mainnet (5042) is required.');
