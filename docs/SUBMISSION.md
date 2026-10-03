@@ -1,6 +1,8 @@
 # ArcReceipt — Arc Microgrants submission
 
-Status: prepared; not submitted yet.
+Status: implementation, independent self-test, independent acceptance and public deployment complete. DoraHacks Profile, Details and Team steps filled and saved on 2026-10-04. Final submission is pending explicit approval to provide required private contact identifiers to DoraHacks staff; automatic approval review blocked that contact step. No submission-success confirmation has been observed.
+
+The existing Chrome form remains open at the Contact step of Arc Microgrants. Continue that draft rather than creating a duplicate Build. Public project copy is preserved in [DORAHACKS-DESCRIPTION.md](DORAHACKS-DESCRIPTION.md). Private contact values are intentionally not stored in this public repository.
 
 ## Vision
 
