@@ -25,6 +25,7 @@ Open http://localhost:4173 and choose **Try a real mainnet payment**. This queri
 - Native USDC uses 18 decimals; the ERC-20 interface uses 6. Integer arithmetic preserves precision.
 - Arc's dual Transfer events are not added together. Native events retain full precision and take precedence over their ERC-20 representation.
 - A recipient/amount query must match an individual positive transfer exactly; unrelated transfers are not combined to satisfy it.
+- Zero-address burns are excluded; mint events to real recipients are explicitly labeled.
 - Gas is shown separately as `gasUsed × effectiveGasPrice / 10^18` USDC.
 - Finality is reported only when a finalized block is available and covers the transaction.
 

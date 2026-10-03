@@ -1,0 +1,41 @@
+[
+  {
+    "hash": "0x1ecf8bdbb1d4c19aaa11e62a41c34c0bbe2a1bc6f18f0f791b9d230e442ba352",
+    "state": "finalized",
+    "match": true,
+    "amounts": [
+      "0.979243999748"
+    ],
+    "gasUSDC": "0.00063000021",
+    "expectedGas": "0.00063000021",
+    "feeMatches": true,
+    "block": "24103893",
+    "checkedAt": "2026-10-03T20:23:57.791Z"
+  },
+  {
+    "hash": "0x18847a4369a9201a06841ac91cf36699771ab51ea82e617a12a68ed997c31b2b",
+    "state": "finalized",
+    "match": true,
+    "amounts": [
+      "0.000002077894217161"
+    ],
+    "gasUSDC": "0.0005250002625",
+    "expectedGas": "0.0005250002625",
+    "feeMatches": true,
+    "block": "24103902",
+    "checkedAt": "2026-10-03T20:23:58.505Z"
+  },
+  {
+    "hash": "0xd2595af27d63fe05ed723b0f9f326f75b27ae32fd30c023bd125a451ef1affc8",
+    "state": "finalized",
+    "match": true,
+    "amounts": [
+      "0.097612"
+    ],
+    "gasUSDC": "0.0023778011889",
+    "expectedGas": "0.0023778011889",
+    "feeMatches": true,
+    "block": "24103901",
+    "checkedAt": "2026-10-03T20:23:59.241Z"
+  }
+]

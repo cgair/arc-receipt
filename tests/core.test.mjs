@@ -126,6 +126,45 @@ test('top-level native fallback requires positive value and empty calldata', () 
   b.tx.input = '0x1234'; assert.deepEqual(interpret(b).payments, []);
 });
 
+const zeroAddress = '0x' + '0'.repeat(40);
+const zeroTopic = '0x' + '0'.repeat(64);
+test('zero expected recipient is rejected before any RPC request', async () => {
+  const b = fixture(); const { fetcher, calls } = mockRPC(b);
+  assert.throws(() => interpret(b, { recipient: zeroAddress }), /burn|zero address/i);
+  await assert.rejects(verifyPayment(b.hash, { recipient: zeroAddress }, fetcher), /burn|zero address/i);
+  assert.equal(calls.length, 0);
+});
+for (const kind of ['native', 'erc20']) {
+  test(`${kind} burn is excluded even when its amount matches`, () => {
+    const b = fixture(2); const emitter = kind === 'native' ? NETWORK.nativeEmitter : NETWORK.usdc;
+    b.receipt.logs = b.receipt.logs.filter(log => log.address === emitter);
+    b.receipt.logs[0].topics[2] = zeroTopic;
+    const r = interpret(b, { amount: '0.097612' });
+    assert.equal(r.state, 'finalized'); assert.deepEqual(r.payments, []); assert.equal(r.match, false); assert.equal(r.matchingTransfers, 0);
+    assert.ok(r.gas.usdc); assert.equal(r.evidence.receipt.logs[0].topics[2], zeroTopic);
+  });
+  test(`${kind} mint to a real recipient is retained and explicitly identified`, () => {
+    const b = fixture(2); const emitter = kind === 'native' ? NETWORK.nativeEmitter : NETWORK.usdc;
+    b.receipt.logs = b.receipt.logs.filter(log => log.address === emitter);
+    b.receipt.logs[0].topics[1] = zeroTopic;
+    const r = interpret(b, { recipient: samples[2].source.sample.recipient, amount: '0.097612' });
+    assert.equal(r.match, true); assert.equal(r.payments.length, 1); assert.equal(r.payments[0].from, zeroAddress);
+    assert.equal(r.payments[0].kind, 'mint'); assert.match(r.payments[0].source, /mint/i); assert.equal(r.payments[0].amount, '0.097612');
+  });
+}
+test('mixed ordinary transfer and burn only match the ordinary payment', () => {
+  const b = fixture(); const burn = structuredClone(b.receipt.logs[0]);
+  burn.topics[2] = zeroTopic; burn.data = word(1000000000000000000n); burn.logIndex = '0x1'; b.receipt.logs.push(burn);
+  assert.equal(interpret(b, { amount: '1' }).match, false);
+  const r = interpret(b, { amount: samples[0].source.sample.amountUSDC });
+  assert.equal(r.match, true); assert.equal(r.payments.length, 1); assert.equal(r.payments[0].kind, 'transfer');
+});
+test('eventless top-level native send to zero cannot use payment fallback', () => {
+  const b = fixture(); b.receipt.logs = []; b.tx.to = zeroAddress; b.receipt.to = zeroAddress;
+  const r = interpret(b, { amount: samples[0].source.sample.amountUSDC });
+  assert.deepEqual(r.payments, []); assert.equal(r.match, false);
+});
+
 function mockRPC(bundle, overrides = {}) {
   const calls = [];
   const fetcher = async (url, options) => {
