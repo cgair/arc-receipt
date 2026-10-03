@@ -1,8 +1,14 @@
 # ArcReceipt — Arc Microgrants submission
 
-Status: implementation, independent self-test, independent acceptance and public deployment complete. DoraHacks Profile, Details and Team steps filled and saved on 2026-10-04. Final submission is pending explicit approval to provide required private contact identifiers to DoraHacks staff; automatic approval review blocked that contact step. No submission-success confirmation has been observed.
+Status: **Submitted — Under Review**, verified on 2026-10-04 Asia/Shanghai. DoraHacks displayed “Build Submitted!” and confirmed ArcReceipt was submitted to “Arc Microgrants | Circle”. The event's Builds page then showed “Your Build” and “Under Review”.
 
-The existing Chrome form remains open at the Contact step of Arc Microgrants. Continue that draft rather than creating a duplicate Build. Public project copy is preserved in [DORAHACKS-DESCRIPTION.md](DORAHACKS-DESCRIPTION.md). Private contact values are intentionally not stored in this public repository.
+Build: https://dorahacks.io/build/49345
+
+Event status: https://dorahacks.io/hackathon/arc-microgrants/build
+
+Public project copy is preserved in [DORAHACKS-DESCRIPTION.md](DORAHACKS-DESCRIPTION.md). Required private contact information was provided with the user's explicit permission; private contact values are not stored in this public repository. Prior Arc experience was answered “Testnet”, as confirmed by the user. Previous Circle/Arc funding for this newly created project was answered “No”.
+
+This confirms submission, not organizer eligibility approval or a grant award. All applications are expected to receive decisions by October 21, 2026, according to the event rules.
 
 ## Vision
 

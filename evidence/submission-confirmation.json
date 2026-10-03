@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-03T21:04:58.160Z",
+  "localDate": "2026-10-04",
+  "project": "ArcReceipt",
+  "buildId": 49345,
+  "buildUrl": "https://dorahacks.io/build/49345",
+  "event": "Arc Microgrants | Circle",
+  "eventUrl": "https://dorahacks.io/hackathon/arc-microgrants/build",
+  "confirmationHeading": "Build Submitted!",
+  "confirmationText": "Your Build ArcReceipt has been submitted to hackathon Arc Microgrants | Circle and is now under review. You can still edit this Build before judging.",
+  "statusPageLabels": ["Your Build", "Under Review"],
+  "method": "Observed visible confirmation and event Builds page in the user's existing Chrome session",
+  "note": "Submission receipt only; not an eligibility approval or award. Private contact information omitted."
+}

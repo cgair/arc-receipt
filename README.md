@@ -2,6 +2,8 @@
 
 [**Open the live application**](https://cgair.github.io/arc-receipt/)
 
+[Arc Microgrants submission](https://dorahacks.io/build/49345) — submitted and under review as of October 4, 2026.
+
 Verify a USDC payment on **Arc mainnet (chain 5042)** and export its evidence as JSON. An independent, non-custodial tool for contributors, grant recipients and payment operators who need to answer: did this exact recipient receive this exact amount?
 
 The app queries the public mainnet RPC directly from the browser. No wallet connection, account, private key, transaction signing or backend database is required.
