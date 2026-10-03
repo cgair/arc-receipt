@@ -1,0 +1,1 @@
+{"name":"arc-receipt","version":"1.0.0","private":true,"type":"module","description":"Non-custodial USDC payment verification on Arc mainnet","scripts":{"test":"node --test tests/*.test.mjs","check":"node --check dist/core.mjs && node --check dist/app.mjs","serve":"python3 -m http.server 4173 --directory dist"}}

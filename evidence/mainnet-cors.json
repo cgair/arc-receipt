@@ -1,0 +1,35 @@
+{
+  "rpcUrl": "https://rpc.mainnet.arc.io",
+  "origin": "http://localhost:5173",
+  "checkedAt": "2026-10-03T20:16:48.846611+00:00",
+  "request": {
+    "method": "OPTIONS",
+    "accessControlRequestMethod": "POST",
+    "accessControlRequestHeaders": "content-type"
+  },
+  "headers": {
+    "post": [
+      "HTTP/2 200 ",
+      "date: Sat, 03 Oct 2026 20:14:32 GMT",
+      "content-type: application/json",
+      "access-control-allow-headers: content-type, authorization",
+      "access-control-allow-methods: GET, POST, OPTIONS",
+      "access-control-allow-origin: http://localhost:5173",
+      "access-control-expose-headers: ",
+      "access-control-max-age: 3600",
+      "vary: Accept-Encoding"
+    ],
+    "preflight": [
+      "HTTP/2 204 ",
+      "date: Sat, 03 Oct 2026 20:16:06 GMT",
+      "content-type: application/json",
+      "access-control-allow-headers: content-type, authorization",
+      "access-control-allow-methods: GET, POST, OPTIONS",
+      "access-control-allow-origin: http://localhost:5173",
+      "access-control-expose-headers: ",
+      "access-control-max-age: 3600",
+      "vary: Accept-Encoding"
+    ]
+  },
+  "note": "curl Origin POST and OPTIONS confirm CORS headers; actual browser fetch still requires browser-side acceptance testing. Cookies and unrelated headers intentionally excluded."
+}

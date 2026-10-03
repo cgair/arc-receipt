@@ -1,0 +1,33 @@
+{
+  "chainId": 5042,
+  "rpcUrl": "https://rpc.mainnet.arc.io",
+  "samples": [
+    {
+      "label": "mainnet-native-transfer",
+      "kind": "native",
+      "hash": "0x1ecf8bdbb1d4c19aaa11e62a41c34c0bbe2a1bc6f18f0f791b9d230e442ba352",
+      "recipient": "0xed9ab5bc05a0152b9dc2f7902e8369af7bc18771",
+      "amountUSDC": "0.979243999748",
+      "gasCostUSDC": "0.00063000021",
+      "file": "mainnet-native-transfer.json"
+    },
+    {
+      "label": "mainnet-native-precision",
+      "kind": "native",
+      "hash": "0x18847a4369a9201a06841ac91cf36699771ab51ea82e617a12a68ed997c31b2b",
+      "recipient": "0x796effe3af0730f948aeb5e94552a31ded390fd7",
+      "amountUSDC": "0.000002077894217161",
+      "gasCostUSDC": "0.0005250002625",
+      "file": "mainnet-native-precision.json"
+    },
+    {
+      "label": "mainnet-erc20-transfer",
+      "kind": "erc20",
+      "hash": "0xd2595af27d63fe05ed723b0f9f326f75b27ae32fd30c023bd125a451ef1affc8",
+      "recipient": "0x64c0d175ed441b4184f0c92551b79f8655219688",
+      "amountUSDC": "0.097612",
+      "gasCostUSDC": "0.0023778011889",
+      "file": "mainnet-erc20-transfer.json"
+    }
+  ]
+}
